@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="src/PickerView.js"></script>
+        <link rel="stylesheet" type="text/css" href="src/PickerView.css">
+		<style>
+			body {
+				background-color: #444;
+			}
+			.picker {
+				width: 30rem;
+				margin: 20% auto;
+			}
+			.picker .component-picker{
+				float: left;
+			}
+			#results {
+				width: 100%;
+				padding: 1rem;
+				color: #ccf;
+				float: left;
+				text-align: center;
+				font-size: 2rem;
+			}
+		</style>
+    </head>
+
+    <body>
+		<div class="picker"></div>
+		<div id="results"></div>
+		<script>
+			var years = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020];
+			var months = [1,2,3,4,5,6,7,8,9,10,11,12];
+			var days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
+			var target = document.querySelector('body div.picker');
+			var Y = new PickerView(target, years).onChange(lystener);
+			var M = new PickerView(target, months).onChange(lystener);
+			var D = new PickerView(target, days).onChange(lystener);
+			var res = document.getElementById('results');
+			function lystener(){
+				res.innerHTML = [Y, M, D].map(function(Instance){
+					return Instance.value();
+				}).join(' - ');
+			}
+		</script>
+    </body>
+</html>
