@@ -1,5 +1,5 @@
 
-# PickerView
+# Component Picker
 
 ### A JavaScript/CSS component picker, with native JS and CSS transitions.
 
