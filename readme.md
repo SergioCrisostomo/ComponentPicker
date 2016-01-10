@@ -5,8 +5,8 @@
 
 
 
-This can be used as datepicker, component picker or whatever you pass into it. It can me multiple or simple.
-You can see a demo in the repository.
+This can be used as datepicker, component picker or whatever you pass into it. It can me multiple or simple.  
+Here you can see a [demo from this repository](https://rawgit.com/SergioCrisostomo/ComponentPicker/master/demo.html).
 
 _This is under development. If its usefull for you you are welcome to contribute._
 
