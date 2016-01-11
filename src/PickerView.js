@@ -60,6 +60,18 @@ var PickerView = function(target, data) {
         window.addEventListener(_up, picker.scrollStop.bind(picker));
 	}
 
+	picker.getElementIndex = function(hint){
+		var index;
+		var elements = picker.elements.wrapper.children.scroller.children;
+		for (var i = 0; i < elements.length; i++){
+			if (typeof hint == 'string' && elements[i].innerHTML != hint) continue;
+			else if (elements[i] != hint) continue;
+			index = i;
+			break;
+		}
+		return index;
+	}
+
     picker.getPointerCoordinates = function(e) {
         return {
             x: e.pageX || e.originalEvent.touches[0].pageX,
@@ -68,7 +80,12 @@ var PickerView = function(target, data) {
 	}
 
     picker.onclick = function(e) {
-        // maybe usefull in the future, could trigger callback?
+		if (e.target.tagName.toLowerCase() != 'li') return;
+		var index = picker.getElementIndex(e.target);
+		var currentPosition = picker.getPointerCoordinates(e);
+		picker.scrollPosition = ((index-1) * -picker.snapHeight);
+		picker.scrollEl.style.marginTop = picker.scrollPosition + 'px';
+		picker.scrollStop(e);
 	}
 
     picker.onscroll = function(e) {
@@ -78,7 +95,6 @@ var PickerView = function(target, data) {
 		
         var currentPosition = picker.getPointerCoordinates(e);
         picker.scrollPosition = currentPosition.y - picker.pointerdown.y + picker.scrollStartPosition;
-		
         var direction = currentPosition.y - (picker.lastPosition.y || picker.pointerdown.y);
         if (picker.scrollPosition > 0 && direction > 0) picker.scrollPosition = picker.snapHeight * (4 / 3);
         else if (picker.scrollPosition - (picker.snapHeight * 2) < -picker.maxScrollLength) picker.scrollPosition = -picker.maxScrollLength + (1.8 * picker.snapHeight);
@@ -92,7 +108,7 @@ var PickerView = function(target, data) {
 	}
 
     picker.scrollStop = function(e) {
-        if (!picker.pointerdown) return;
+        if (!picker.pointerdown && e.type != 'click') return;
         picker.findNearestSnap();
         picker.pointerdown = false;
 	}
@@ -105,7 +121,6 @@ var PickerView = function(target, data) {
 		if(index == picker.selectedIndex) return;
 		picker.selectedIndex = index;
 		if (picker.callback && !internal) picker._callback(index);
-		
 	}
 
 	picker._callback = function(index){
@@ -120,16 +135,11 @@ var PickerView = function(target, data) {
 		return this;
 	}
 
-	this.value = function(force){
+	this.value = function(newValue){
 		var elements = picker.elements.wrapper.children.scroller.children;
-		if (typeof force == 'undefined') return elements[picker.selectedIndex].innerHTML;
+		if (typeof newValue == 'undefined') return elements[picker.selectedIndex].innerHTML;
 		
-		var index;
-		for (var i = 0; i < elements.length; i++){
-			if (elements[i].innerHTML != force) continue;
-			index = i;
-			break;
-		}
+		var index = picker.getElementIndex(newValue);
 		if (typeof index == 'undefined') return false;
 		picker.scrollPosition = -(index-1) * picker.snapHeight;
 		picker.scrollEl.style.marginTop = picker.scrollPosition + 'px';
