@@ -2,7 +2,7 @@
 /*
 this.name = 'Component Picker';
 this.version = '1.0.0';
-this.author = Sérgio Crisóstomo
+this.author = Sergio Crisostomo
 */
 
 class ComponentPicker {
@@ -37,9 +37,9 @@ class ComponentPicker {
 			newElement('li', null, ol).innerHTML = option;
 		});
         this.elements.scroller = ol;
-		this.maxScrollLength = ol.scrollHeight;
 		this.startEl = ol.firstElementChild;
 		this.snapHeight = ol.firstElementChild.getBoundingClientRect().height;
+        this.maxScrollLength = ol.children.length * this.snapHeight
 		this.snapAdjust = parseInt(window.getComputedStyle(this.startEl).borderWidth) * 2;
 	}
 
@@ -137,6 +137,7 @@ class ComponentPicker {
         var final = (this.snapHeight * nearest) + this.snapAdjust;
 		this.startEl.style.marginTop = final + 'px';
 		var index = Math.abs((nearest - 1) * -1); // to avoid having "-0"
+        if (index > this.elements.scroller.children.length) return;
 		if(index == this.selectedIndex) return;
 		this.selectedIndex = index;
 		if (this.callback && !internal) this._callback(index);
@@ -164,4 +165,46 @@ class ComponentPicker {
 		this.startEl.style.marginTop = this.scrollPosition + 'px';
 		this.findNearestSnap(true);
 	}
+}
+
+//TODO: separate this into another file/module ?
+function DatePicker (target, data) {
+    this.wrapper = document.createElement('div');
+    this.wrapper.className = 'date-picker';
+    target.appendChild(this.wrapper);
+    this.pickers = data.map(component=>{
+        return new ComponentPicker(target, component)
+    });
+    return this;
+}
+
+DatePicker.prototype.today = function(){
+    var now = new Date();
+    var dateComponents = [now.getFullYear(), now.getMonth() + 1, now.getDate()];
+    this.setValue(dateComponents);
+}
+DatePicker.prototype.getValue = function(){
+    return this.pickers.map(picker=>{
+        return picker.getValue();
+    });
+}
+DatePicker.prototype.setValue = function(vals){
+    return this.pickers.map((pickers, i)=>{
+        return picker.setValue(vals, i);
+    });
+}
+DatePicker.prototype.onChange = function(callback){
+    var self = this;
+    function commonCallback(){
+        var values = self.pickers.map(picker=>{
+            return picker.value;
+        });
+        var indexes = self.pickers.map(picker=>{
+            return picker.index;
+        });
+        callback.call(self, values, indexes);
+    }
+    this.pickers.forEach(picker=>{
+        picker.onChange(commonCallback)
+    });
 }
