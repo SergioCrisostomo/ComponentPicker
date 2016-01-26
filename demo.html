@@ -1,47 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script type="text/javascript" src="src/PickerView.js"></script>
-        <link rel="stylesheet" type="text/css" href="src/PickerView.css">
-		<style>
-			body {
-				background-color: #444;
-			}
-			.picker {
-				width: 30rem;
-				margin: 20% auto;
-			}
-			.picker .component-picker{
-				float: left;
-			}
-			#results {
-				width: 100%;
-				padding: 1rem;
-				color: #ccf;
-				float: left;
-				text-align: center;
-				font-size: 2rem;
-			}
-		</style>
-    </head>
+<head>
+    <script type="text/javascript" src="lib/ComponentPicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/ComponentPicker.css">
+    <style>
+    body {
+        background-color: #fff;
+    }
+    .example {
+        float: left;
+        width: 30%;
+    }
+    .example h1 {
+        color: #000;
+    }
+    .picker {
+        width: 30rem;
+        //margin: 20% auto;
+    }
+    .picker .component-picker{
+        float: left;
+    }
+    .value {
+        width: 100%;
+        padding: 1rem;
+        color: #333;
+        float: left;
+        font-size: 2rem;
+    }
+    </style>
+</head>
 
-    <body>
-		<div class="picker"></div>
-		<div id="results"></div>
-		<script>
-			var years = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020];
-			var months = [1,2,3,4,5,6,7,8,9,10,11,12];
-			var days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
-			var target = document.querySelector('body div.picker');
-			var Y = new PickerView(target, years).onChange(lystener);
-			var M = new PickerView(target, months).onChange(lystener);
-			var D = new PickerView(target, days).onChange(lystener);
-			var res = document.getElementById('results');
-			function lystener(){
-				res.innerHTML = [Y, M, D].map(function(Instance){
-					return Instance.value();
-				}).join(' - ');
-			}
-		</script>
-    </body>
+<body>
+    <div class="example">
+        <h1>Single component pickers</h1>
+        <div class="picker"></div>
+        <div class="value"></div>
+    </div>
+    <div class="example">
+        <h1>Date picker (3 in one)</h1>
+        <div class="picker"></div>
+        <div class="value"></div>
+    </div>
+    <script>
+
+    var targets = document.querySelectorAll('body div.example .picker');
+    var componentTarget = targets[0];
+    var datepickerTarget = targets[1];
+    new ComponentPicker(componentTarget, ['Day', 'Night']).onChange(listener);
+    new ComponentPicker(componentTarget, ['am', 'pm']).onChange(listener);
+    new DatePicker(datepickerTarget, ['2015-2025', '1-12', '1-31']).onChange(listener);
+    function listener(){
+        var valueDiv = this.wrapper.parentElement.nextElementSibling;
+        var val = this.getValue()
+        valueDiv.innerHTML = val instanceof Array ? val.join('-') : val;
+    }
+    </script>
+</body>
 </html>
