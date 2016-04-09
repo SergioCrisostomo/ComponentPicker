@@ -8,7 +8,7 @@
 This can be used as datepicker, component picker or whatever you pass into it. It can me multiple or simple.  
 Here you can see a [demo from this repository](https://rawgit.com/SergioCrisostomo/ComponentPicker/master/demo.html).
 
-## Usage
+## Usage in the Browser
 
     var picker = new ComponentPicker(element, dataArray);
 	picker.onChange(function(value, i){
@@ -29,9 +29,15 @@ Here you can see a [demo from this repository](https://rawgit.com/SergioCrisosto
  - **getValue**, to get the current displayed value.
  - **setValue**, to set the ComponentPicker value. If the value passed does not exist will ignore the action silently.
 
+## Developers
+
+If you make changes to the `src/` folder and want to export that as ES5 JavaScript
+into the `lib/` folder you can do this in the command line:
+
+    $ npm install
+    $ babel --presets es2015 src --out-dir lib
 
 ### TODO:
 
  - optional button for callback (like "done", or "set", in bottom)
  - maybe in the future the axis can be configurable, so it works in horizontal also.
- - separate COmponent Picker and Date Picker into modules with browserify
