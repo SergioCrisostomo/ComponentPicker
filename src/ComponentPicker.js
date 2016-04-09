@@ -189,7 +189,7 @@ class DatePicker {
 
 	setValue(vals) {
 		return this.pickers.map((picker, i) => {
-			return picker.setValue(vals, i);
+			return picker.setValue(vals[i]);
 		});
 	}
 
