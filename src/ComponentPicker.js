@@ -69,16 +69,17 @@ class ComponentPicker {
         return normalized;
     }
 
-    getElementIndex(hint) {
-		var index;
-		if (!hint) hint = this.getValue();
-		var elements = this.elements.scroller.children;
-		for (var i = 0; i < elements.length; i++) {
-			index = i;
-			if (typeof hint == 'string' && elements[i].innerHTML == hint) break;
-			else if (elements[i] == hint) break;
-		}
-		return index;
+	getElementIndex(_hint) {
+        var index;
+        var hint = typeof _hint == 'number' ? _hint + '' : _hint || this.getValue();
+        var isElement = hint instanceof Element;
+        var elements = this.elements.scroller.children;
+        for (var i = 0; i < elements.length; i++) {
+            index = i;
+            if (isElement && elements[i] == hint) break;
+            if (!isElement && elements[i].innerHTML == hint) break;
+        }
+        return index;
     }
 
     getPointerCoordinates(e) {
