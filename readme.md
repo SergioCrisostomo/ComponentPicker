@@ -10,10 +10,14 @@ Here you can see a [demo from this repository](https://rawgit.com/SergioCrisosto
 
 ## Usage in the Browser
 
-    var picker = new ComponentPicker(element, dataArray);
+	// simple Picker
+	var picker = new ComponentPicker(element, dataArray);
 	picker.onChange(function(value, i){
 		console.log('I changed to ', value);
 	});
+	
+	// Date picker
+	new DatePicker(datepickerTarget, ['2015-2025', '1-12', '1-31']).onChange(listener);
 
 ### Arguments
 
