@@ -1,6 +1,6 @@
 {
   "name": "component-picker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Component picker. Date, currency, whatever. Touch, scroll and mouse friendly.",
   "main": "",
   "dependencies": {

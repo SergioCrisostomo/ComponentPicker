@@ -70,15 +70,15 @@ class ComponentPicker {
     }
 
     getElementIndex(hint) {
-        var index;
-        var elements = this.elements.scroller.children;
-        for (var i = 0; i < elements.length; i++) {
-            if (typeof hint == 'string' && elements[i].innerHTML != hint) continue;
-            else if (elements[i] != hint) continue;
-            index = i;
-            break;
-        }
-        return index;
+		var index;
+		if (!hint) hint = this.getValue();
+		var elements = this.elements.scroller.children;
+		for (var i = 0; i < elements.length; i++) {
+			index = i;
+			if (typeof hint == 'string' && elements[i].innerHTML == hint) break;
+			else if (elements[i] == hint) break;
+		}
+		return index;
     }
 
     getPointerCoordinates(e) {
@@ -195,13 +195,10 @@ class DatePicker {
     onChange(callback) {
         var self = this;
         function commonCallback() {
-            var values = [],
-                indexes = [];
-            self.pickers.forEach(picker => {
-                values.push(picker.value);
-                indexes.push(picker.index);
-            });
-            callback.call(self, values, indexes);
+			var indexes = self.pickers.map(function (picker) {
+				return picker.getElementIndex();
+			});
+			callback.call(self, self.getValue(), indexes);
         }
         this.pickers.forEach(picker => {
             picker.onChange(commonCallback);
