@@ -171,7 +171,7 @@ class DatePicker {
 	constructor(target, data) {
 		this.wrapper = newElement('div', 'date-picker', target);
 		this.pickers = data.map(component => {
-			return new ComponentPicker(target, component);
+			return new ComponentPicker(this.wrapper, component);
 		});
 	}
 
