@@ -15,7 +15,7 @@ Here you can see a [demo from this repository](https://rawgit.com/SergioCrisosto
 	picker.onChange(function(value, i){
 		console.log('I changed to ', value);
 	});
-	
+
 	// Date picker
 	new DatePicker(datepickerTarget, ['2015-2025', '1-12', '1-31']).onChange(listener);
 
@@ -35,11 +35,9 @@ Here you can see a [demo from this repository](https://rawgit.com/SergioCrisosto
 
 ## Developers
 
-If you make changes to the `src/` folder and want to export that as ES5 JavaScript
-into the `lib/` folder you can do this in the command line:
+If you make changes to the `src/` folder and want to export CSS and JavaScript (as ES5 JavaScript) into the `lib/` folder you can do this in the command line:
 
-    $ npm install
-    $ babel --presets es2015 src --out-dir lib
+    $ npm run build
 
 ### TODO:
 

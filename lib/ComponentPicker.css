@@ -1,57 +1,53 @@
-
 .component-picker {
-    position: relative;
-	background-color: #fff;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  float: left;
+  position: relative;
+  background-color: #fff;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
-
 .component-picker ol {
-    overflow: hidden;
-    width: 8rem;
-    height: 8rem;
-    position: relative;
-    text-align: center;
-    border: 0.5rem solid black;
-    padding: 0px;
-    margin: 0px;
-	z-index: 1;
+  overflow: hidden;
+  width: 6em;
+  height: 8em;
+  border: 0.5rem solid #000;
+  position: relative;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+  z-index: 1;
 }
-
 .component-picker li {
-    margin: 0px;
-    list-style: none;
-    padding: 0.5rem 0;
-    height: 1rem;
-    border: 0.1rem solid transparent;
-    transition: margin-top 0.5s;
-    background-color: transparent;
-	z-index: 1;
+  margin: 0px;
+  list-style: none;
+  padding: 0.5em 0;
+  border: 0.1em solid transparent;
+  transition: margin-top 0.5s;
+  background-color: transparent;
+  z-index: 1;
 }
-
 .component-picker .fader {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 9rem;
-    background: linear-gradient(top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 0.7) 100%);
-    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 0.7) 100%);
-    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 0.7) 100%);
-    pointer-events: none;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.7) 100%);
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.7) 100%);
+  background: -moz-linear-gradient(top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.7) 100%);
+  pointer-events: none;
 }
-
 .component-picker .chosen {
-    position: absolute;
-    top: 2.8rem;
-    height: 2.2rem;
-    width: 9rem;
-    background-color: #aaa;
-    opacity: 0.5;
-    z-index: 0;
+  position: absolute;
+  top: 2.8rem;
+  height: 2.2rem;
+  width: 100%;
+  background-color: #aaa;
+  opacity: 0.5;
+  z-index: 0;
 }
