@@ -150,6 +150,8 @@ class ComponentPicker {
 
 	onChange(callback) {
 		this.callback = callback;
+		var i = this.selectedIndex;
+		if (arguments.length == 0 && this.callback) this._callback(this.selectedIndex);
 		return this;
 	}
 
