@@ -33,7 +33,7 @@
 
 <body>
 	You can use "scroll", "click", or "drag" to choose between components.
-	
+
     <div class="example">
         <h1>Single component pickers</h1>
         <div class="picker"></div>
@@ -51,7 +51,9 @@
     var datepickerTarget = targets[1];
     new ComponentPicker(componentTarget, ['Day', 'Night']).onChange(listener);
     new ComponentPicker(componentTarget, ['am', 'pm']).onChange(listener);
-    new DatePicker(datepickerTarget, ['2015-2025', '1-12', '1-31']).onChange(listener);
+    new DatePicker(datepickerTarget, ['2015-2025', '1-12', '1-31'], {pad: true})
+		.onChange(listener)
+		.today();
     function listener(){
         var valueDiv = this.wrapper.parentElement.nextElementSibling;
         var val = this.getValue()
