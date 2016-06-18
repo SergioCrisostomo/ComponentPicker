@@ -191,6 +191,7 @@ class DatePicker {
 		var dateComponents = [now.getFullYear(), now.getMonth() + 1, now.getDate()];
 		if (this.options.pad) dateComponents = dateComponents.map(pad);
 		this.setValue(dateComponents);
+		return this;
 	}
 
 	getValue() {
@@ -200,9 +201,10 @@ class DatePicker {
 	}
 
 	setValue(vals) {
-		return this.pickers.map((picker, i) => {
-			return picker.setValue(vals[i]);
+		this.pickers.forEach((picker, i) => {
+			picker.setValue(vals[i]);
 		});
+		return this;
 	}
 
 	onChange(callback) {
@@ -216,6 +218,7 @@ class DatePicker {
 		this.pickers.forEach(picker => {
 			picker.onChange(commonCallback);
 		});
+		return this;
 	}
 
 }
