@@ -169,17 +169,27 @@ class ComponentPicker {
 	}
 }
 
+function pad(s){
+	return (s < 10) ? '0' + s : s;
+}
+
 class DatePicker {
-	constructor(target, data) {
-		this.wrapper = newElement('div', 'date-picker', target);
-		this.pickers = data.map(component => {
-			return new ComponentPicker(this.wrapper, component);
-		});
-	}
+	constructor(target, data, options) {
+		this.options = options || {};
+        this.wrapper = newElement('div', 'date-picker', target);
+        this.pickers = data.map(component => {
+            let picker = new ComponentPicker(target, component);
+			if (this.options.pad) [].forEach.call(picker.wrapper.children[0].children, el => {
+				el.innerText = pad(el.innerText);
+			});
+			return picker;
+        });
+    }
 
 	today() {
 		var now = new Date();
 		var dateComponents = [now.getFullYear(), now.getMonth() + 1, now.getDate()];
+		if (this.options.pad) dateComponents = dateComponents.map(pad);
 		this.setValue(dateComponents);
 	}
 
